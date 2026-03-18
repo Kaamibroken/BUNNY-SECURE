@@ -1,9 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 
-export default function ResetPassword() {
+function ResetForm() {
   const [pass, setPass] = useState('');
   const [conf, setConf] = useState('');
   const [showP, setShowP] = useState(false);
@@ -37,6 +37,7 @@ export default function ResetPassword() {
       <div className="scanline" />
       <Navbar />
       <div className="login-page">
+
         <div className="login-card">
           <div className="login-icon">🔑</div>
           <h2 className="login-title">RESET PASSWORD</h2>
@@ -71,5 +72,13 @@ export default function ResetPassword() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={<div className="loading-state"><div className="spinner"/></div>}>
+      <ResetForm />
+    </Suspense>
   );
 }
